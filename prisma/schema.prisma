@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Usuario {
+nombre String
+correo String @unique
+password String
+foto String
+usuario String @unique
+rol String @default("MIEMBRO")
+numSolapin String @unique @id
+revisado Boolean @default(false)
+actividad Actividad[] 
+reconocimiento  Reconocimiento[]
+}
+
+model Actividad {
+  idActividad Int @id @unique @default(autoincrement())
+  lugar String
+  fecha String
+  nombre String
+  hora String
+  implicado String
+  costo Float 
+  solapin String
+  activista Usuario @relation(fields: [solapin], references: [numSolapin])
+  nucleoID Int 
+  nucle Nucleo @relation(fields: [nucleoID], references: [idNucleo])
+}
+
+model Reconocimiento {
+  idReconocimiento Int @id @unique @default(autoincrement())
+  nombre  String
+  fecha String
+  tipo String
+  costo Float
+  implicados String
+  solapin String
+  reconocedor Usuario @relation(fields: [solapin], references: [numSolapin])
+  nucleoID Int 
+  nucle Nucleo @relation(fields: [nucleoID], references: [idNucleo])
+} 
+
+model Nucleo {
+  idNucleo Int @id @unique @default(autoincrement())
+  cantMilitante Int
+  nombre String
+  fondo Fondo?
+  acti Actividad[]
+  reco Reconocimiento[]
+}
+
+model Fondo {
+  idFondo Int @id @default( autoincrement()) @unique
+  presupuestoMensual Float
+  presupuestoAnual Float
+  fondoSindical Float
+  nucleoID Int @unique
+  nucle Nucleo @relation(fields: [nucleoID], references: [idNucleo])
+}
