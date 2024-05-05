@@ -27,8 +27,8 @@ export const listarActividades = async (req= request, res= response)=>{
 
 export const eliminarActividad = async (req = request, res = response)=>{
     try {
-        const idActividad = req.params.idActividad
-        const x = parseInt(idActividad)
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeActividad = await actividadQuery.existeActividad(x)
         if(!existeActividad) {
             return res.status(400).json({ error: 'La actividad no existe' });
@@ -44,8 +44,8 @@ export const eliminarActividad = async (req = request, res = response)=>{
 export const actualizarActividad = async (req = request, res = response)=>{
     try {
         const {nombre, lugar, fecha, hora, implicado, costo} = req.body
-        const idActividad = req.params.idActividad
-        const x = parseInt(idActividad)
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeActividad = await actividadQuery.existeActividad(x)
         if(!existeActividad) {
             return res.status(400).json({ error: 'La actividad no existe' });

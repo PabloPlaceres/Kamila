@@ -27,8 +27,8 @@ export const listarNucleo = async (req= request, res= response)=>{
 
 export const eliminarNucleo = async (req = request, res = response)=>{
     try {
-        const idNucleo  = req.params.idNucleo
-        const x = parseInt(idNucleo )
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeNucleo = await nucleoQuery.existeNucleo(x)
         if(!existeNucleo) {
             return res.status(400).json({ error: 'El nucleo no existe' });
@@ -44,8 +44,8 @@ export const eliminarNucleo = async (req = request, res = response)=>{
 export const actualizarNucleo = async (req = request, res = response)=>{
     try {
         const { cantMilitante, nombre} = req.body
-        const idNucleo  = req.params.idNucleo
-        const x = parseInt(idNucleo )
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeNucleo = await nucleoQuery.existeNucleo(x)
         if(!existeNucleo) {
             return res.status(400).json({ error: 'El nucleo no existe' });

@@ -27,8 +27,8 @@ export const listarReconocimiento = async (req= request, res= response)=>{
 
 export const eliminarReconocimiento = async (req = request, res = response)=>{
     try {
-        const idReconocimiento= req.params.idReconocimiento
-        const x = parseInt(idReconocimiento)
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeReconocimiento = await reconocimientoQuery.existereconocimiento(x)
         if(!existeReconocimiento) {
             return res.status(400).json({ error: 'El reconocimiento no existe' });
@@ -44,8 +44,8 @@ export const eliminarReconocimiento = async (req = request, res = response)=>{
 export const actualizarReconocimeinto = async (req = request, res = response)=>{
     try {
         const {nombre, fecha, tipo, implicado, costo} = req.body
-        const idReconocimiento= req.params.idReconocimiento
-        const x = parseInt(idReconocimiento)
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeReconocimiento = await reconocimientoQuery.existereconocimiento(x)
         if(!existeReconocimiento) {
             return res.status(400).json({ error: 'El reconocimiento no existe' });

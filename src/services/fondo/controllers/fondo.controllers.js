@@ -27,8 +27,8 @@ export const listarFondo = async (req= request, res= response)=>{
 
 export const eliminarFondo = async (req = request, res = response)=>{
     try {
-        const idFondo  = req.params.idFondo 
-        const x = parseInt(idFondo )
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeFondo = await fondoQuery.existeFondo(x)
         if(!existeFondo) {
             return res.status(400).json({ error: 'El fondo no existe' });
@@ -44,8 +44,8 @@ export const eliminarFondo = async (req = request, res = response)=>{
 export const actualizarFondo = async (req = request, res = response)=>{
     try {
         const { presupuestoMensual, presupuestoAnual, fondoSindical} = req.body
-        const idFondo  = req.params.idFondo 
-        const x = parseInt(idFondo )
+        const id  = req.params.id
+        const x = parseInt(id )
         const existeFondo = await fondoQuery.existeFondo(x)
         if(!existeFondo) {
             return res.status(400).json({ error: 'El fondo no existe' });
