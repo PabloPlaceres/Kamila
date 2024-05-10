@@ -1,13 +1,25 @@
 import { request, response } from "express";
-import reconocimientoQuery from "../querys/reconocimiento.query";
+import reconocimientoQuery from "../querys/reconocimiento.query.js";
+import JWT from "jsonwebtoken";
+import nucleoQuery from "../../nucleo/querys/nucleo.querys.js";
+
 
 
 export const crearReconocimiento = async (req = request, res = response)=>{
     try {
-        //falta esto es procisional falta trabajar con el toquen 
-        const {nombre, fecha, tipo, implicado, costo} = req.body
-    
-        const result = await reconocimientoQuery.crearReconocimientoQuery({nombre, fecha, tipo, implicado, costo})
+        const {nombre, fecha, tipo, implicados, costo, nombreNucleo} = req.body
+        const {numSolapin} = req.users
+
+        const nucleo = await nucleoQuery.existeNucleoNombre(nombreNucleo)
+        
+        if (!nucleo) {
+            return res.status(400).json({ error: 'El nucleo no existe' })
+        }
+
+        const {idNucleo} = nucleo
+        if (!idNucleo) {return res.status(400).json({error: 'El nucleo no viene' })}
+        
+        const result = await reconocimientoQuery.crearReconocimientoQuery({nombre, fecha, tipo, implicados, costo, numSolapin, idNucleo})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)

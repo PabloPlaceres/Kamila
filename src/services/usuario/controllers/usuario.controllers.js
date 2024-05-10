@@ -4,42 +4,11 @@ import bcryptjs from 'bcryptjs'
 
 
 
-export const listarMiembro = async (req= request, res= response)=>{
+export const listarUsuario = async (req= request, res= response)=>{
     try {
-        const resutl = await usuarioQuery.listarMiembrosQuery()
-        res.status(200).json({resutl})
+        const result = await usuarioQuery.listarUsuarioQuery()
+        res.status(200).json({result})
     } catch (error) {
-        console.log(error)
-        res.status(500).json({error})
-    }
-}
-
-export const listarPresidente = async (req= request, res= response)=>{
-    try {
-        const resutl = await usuarioQuery.listarPresidenteQuery()
-        res.status(200).json({resutl})
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({error})
-    }
-}
-
-export const listarAdministrador = async (req= request, res= response)=>{
-    try {
-        const resutl = await usuarioQuery.listarAdministradorQuery()
-        res.status(200).json({resutl})
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({error})
-    }
-}
-
-export const listarPlanificador = async (req= request, res= response)=>{
-    try {
-        const resutl = await usuarioQuery.listarPlanificadorQuery()
-        res.status(200).json({resutl})
-    } catch (error) {
-        console.log(error)
         res.status(500).json({error})
     }
 }
@@ -115,12 +84,12 @@ export const crearUsuario = async (req = request, res = response)=>{
         const {nombre, correo, foto, numSolapin, usuario} = req.body
     
         const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)
-        if (!existeSolapin) {
+        if (existeSolapin) {
             return res.status(400).json({ error: 'El solapin no existe' });
         }
 
         const existeUsuario = await usuarioQuery.existeUsernameQuery(usuario)
-        if (!existeUsuario) {
+        if (existeUsuario) {
             return res.status(400).json({ error: 'El usuario ya existe' });
         }
 

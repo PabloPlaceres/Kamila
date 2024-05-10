@@ -1,10 +1,9 @@
 import { request, response } from "express";
-import nucleoQuery from "../querys/nucleo.querys";
+import nucleoQuery from "../querys/nucleo.querys.js";
  
 
 export const crearNucleo = async (req = request, res = response)=>{
     try {
-        //falta esto es procisional falta trabajar con el toquen 
         const { cantMilitante, nombre} = req.body
     
         const result = await nucleoQuery.crearNucleoQuery({ cantMilitante, nombre})

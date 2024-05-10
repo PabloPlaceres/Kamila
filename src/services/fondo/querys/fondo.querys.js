@@ -3,7 +3,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 const crearFondoQuery = async (fondo) =>{
-    const result = await prisma.fondo.create({data:{fondo}})
+    const result = await prisma.fondo.create({data:{
+        presupuestoAnual: fondo.presupuestoAnual,
+        presupuestoMensual: fondo.presupuestoMensual,
+        fondoSindical: fondo.fondoSindical,
+        nucleoID: fondo.idNucleo
+    }})
     return result
 }
 
@@ -18,7 +23,10 @@ const listaFondoQuery = async ()=>{
 }
 
 const actualizaFondoQuery = async (fondo, id)=>{
-    const result = prisma.fondo.update({where:{idFondo: id},data:{fondo}})
+    const result = prisma.fondo.update({where:{idFondo: id},data:{
+        presupuestoAnual: fondo.presupuestoAnual,
+        presupuestoMensual: fondo.presupuestoMensual,
+        fondoSindical: fondo.fondoSindical,}})
     return result
 }
 

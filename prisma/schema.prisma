@@ -16,7 +16,7 @@ datasource db {
 
 model Usuario {
 nombre String
-correo String @unique
+correo String? @unique
 password String
 foto String
 usuario String @unique
@@ -57,7 +57,7 @@ model Reconocimiento {
 model Nucleo {
   idNucleo Int @id @unique @default(autoincrement())
   cantMilitante Int
-  nombre String
+  nombre String @unique
   fondo Fondo?
   acti Actividad[]
   reco Reconocimiento[]

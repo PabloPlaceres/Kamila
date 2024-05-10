@@ -3,7 +3,15 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 const crearReconocimientoQuery = async (reconocimiento) =>{
-    const result = await prisma.reconocimiento.create({data:{reconocimiento}})
+    const result = await prisma.reconocimiento.create({data:{
+        nombre: reconocimiento.nombre,
+        fecha: reconocimiento.fecha,
+        tipo: reconocimiento.tipo,
+        costo: reconocimiento.costo,
+        implicados: reconocimiento.implicados,
+        solapin: reconocimiento.numSolapin,
+        nucleoID: reconocimiento.idNucleo
+    }})
     return result
 }
 
@@ -18,7 +26,14 @@ const listarReconocimientoQuery = async (nombre)=>{
 }
 
 const actualizaReconocimientosQuery = async (reconocimiento, id)=>{
-    const result = prisma.reconocimiento.update({where:{idReconocimiento: id},data:{reconocimiento}})
+    const result = prisma.reconocimiento.update({where:{idReconocimiento: id},data:{
+        nombre: reconocimiento.nombre,
+        fecha: reconocimiento.fecha,
+        tipo: reconocimiento.tipo,
+        costo: reconocimiento.costo,
+        implicados: reconocimiento.implicados,
+        nucleoID: reconocimiento.nucleoID
+    }})
     return result
 }
 

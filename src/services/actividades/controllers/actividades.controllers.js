@@ -1,13 +1,22 @@
 import { request, response } from "express";
-import actividadQuery from "../querys/actividades.query";
+import actividadQuery from "../querys/actividades.query.js";
 
 
 export const crearActividad = async (req = request, res = response)=>{
     try {
-        //falta esto es procisional falta trabajar con el toquen 
+        const {numSolapin} = req.users
         const {nombre, lugar, fecha, hora, implicado, costo} = req.body
+
+        const nucleo = await nucleoQuery.existeNucleoNombre(nombreNucleo)
+        
+        if (!nucleo) {
+            return res.status(400).json({ error: 'El nucleo no existe' })
+        }
+
+        const {idNucleo} = nucleo
+        if (!idNucleo) {return res.status(400).json({error: 'El nucleo no viene' })}
     
-        const result = await actividadQuery.crearActividadesQuery({nombre, lugar, fecha, hora, implicado, costo})
+        const result = await actividadQuery.crearActividadesQuery({nombre, lugar, fecha, hora, implicado, costo, numSolapin, idNucleo})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)

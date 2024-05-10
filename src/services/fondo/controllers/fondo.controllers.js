@@ -1,13 +1,22 @@
 import { request, response } from "express";
-import fondoQuery from "../querys/fondo.querys";
+import fondoQuery from "../querys/fondo.querys.js";
+import nucleoQuery from "../../nucleo/querys/nucleo.querys.js";
 
 
 export const crearFondo = async (req = request, res = response)=>{
     try {
-        //falta esto es procisional falta trabajar con el toquen 
-        const { presupuestoMensual, presupuestoAnual, fondoSindical} = req.body
-    
-        const result = await fondoQuery.crearFondoQuery({ presupuestoMensual, presupuestoAnual, fondoSindical})
+        const { presupuestoMensual, presupuestoAnual, fondoSindical, nombre} = req.body
+        
+        const nucleo = await nucleoQuery.existeNucleoNombre(nombre)
+        
+        if (!nucleo) {
+            return res.status(400).json({ error: 'El nucleo no existe' })
+        }
+
+        const {idNucleo} = nucleo
+        if (!idNucleo) {return res.status(400).json({error: 'El nucleo no viene' })}
+        
+        const result = await fondoQuery.crearFondoQuery({ presupuestoMensual, presupuestoAnual, fondoSindical, idNucleo})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -43,9 +52,15 @@ export const eliminarFondo = async (req = request, res = response)=>{
 
 export const actualizarFondo = async (req = request, res = response)=>{
     try {
-        const { presupuestoMensual, presupuestoAnual, fondoSindical} = req.body
+        const { presupuestoMensual, presupuestoAnual, fondoSindical, nucleoID} = req.body
         const id  = req.params.id
         const x = parseInt(id )
+        const nucleo = await nucleoQuery.existeNucleo(nucleoID)
+        
+        if (!nucleo) {
+            return res.status(400).json({ error: 'El nucleo no existe' })
+        }
+
         const existeFondo = await fondoQuery.existeFondo(x)
         if(!existeFondo) {
             return res.status(400).json({ error: 'El fondo no existe' });

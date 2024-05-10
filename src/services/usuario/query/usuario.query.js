@@ -3,7 +3,14 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 const crearUsuarioQuery = async (usuario) =>{
-    const result = await prisma.usuario.create({data:{usuario}})
+    const result = await prisma.usuario.create({data:{
+        nombre: usuario.nombre,
+        numSolapin: usuario.numSolapin,
+        foto: usuario.foto,
+        usuario: usuario.usuario,
+        password: usuario.password,
+        correo: usuario.correo
+    }})
     return result
 }
 
@@ -12,30 +19,21 @@ const eliminarUsuarioQuery = async (solapin)=>{
     return result
 }
 
-const listarMiembrosQuery = async ()=>{
-    const result = await prisma.usuario.findUnique({where:{rol:"MIEMBRO"}})
-    return result
-}
+
 
 const actualizarUsuarioQuery = async (usuario, solapin)=>{
-    const result = prisma.usuario.update({where:{numSolapin: solapin},data:{usuario}})
+    const result = prisma.usuario.update({where:{numSolapin: solapin},data:{
+        nombre: usuario.nombre,
+        numSolapin: usuario.numSolapin,
+        foto: usuario.foto,
+        usuario: usuario.usuario,
+        password: usuario.password,
+        correo: usuario.correo
+    }})
     return result
 }
 
-const listarPresidenteQuery = async ()=>{
-    const result = await prisma.usuario.findUnique({where:{rol:"Presidente"}})
-    return result
-}
 
-const listarPlanificadorQuery = async ()=>{
-    const result = await prisma.usuario.findUnique({where:{rol:"PLANIFICADOR"}})
-    return result
-}
-
-const listarAdministradorQuery = async ()=>{
-    const result = await prisma.usuario.findUnique({where:{rol:"ADMINISTRADOR"}})
-    return result
-}
 
 const listarUsuarioRevisadoQuery = async ()=>{
     const result= await prisma.usuario.findUnique({where:{revisado:false}})
@@ -56,17 +54,18 @@ const existeUsuarioQuery = async(solapin)=>{
     return result
 }
 
+const listarUsuarioQuery = async()=>{
+    const result = await prisma.usuario.findMany()
+    return result
+}
+
 const existeUsernameQuery = async (usuario)=>{
     const result = await prisma.usuario.findFirst({where:{usuario:usuario}})
     return result
 }
 
 const usuarioQuery = {usuarioConfirmadoQuery, 
-    listarAdministradorQuery, 
-    listarMiembrosQuery, 
-    listarPlanificadorQuery, 
-    listarPresidenteQuery, 
-    listarUsuarioRevisadoQuery, 
+    listarUsuarioRevisadoQuery, listarUsuarioQuery,
     crearUsuarioQuery, eliminarUsuarioQuery, actualizarUsuarioQuery, 
 existeUsuarioQuery, existeUsernameQuery}
 
