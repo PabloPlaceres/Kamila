@@ -14,8 +14,10 @@ datasource db {
 }
 
 
+
 model Usuario {
 nombre String
+apellido String
 correo String? @unique
 password String
 foto String
@@ -58,16 +60,9 @@ model Nucleo {
   idNucleo Int @id @unique @default(autoincrement())
   cantMilitante Int
   nombre String @unique
-  fondo Fondo?
   acti Actividad[]
   reco Reconocimiento[]
-}
-
-model Fondo {
-  idFondo Int @id @default( autoincrement()) @unique
   presupuestoMensual Float
   presupuestoAnual Float
   fondoSindical Float
-  nucleoID Int @unique
-  nucle Nucleo @relation(fields: [nucleoID], references: [idNucleo])
 }
