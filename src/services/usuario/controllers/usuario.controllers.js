@@ -1,6 +1,11 @@
 import { request, response } from "express";
 import usuarioQuery from "../query/usuario.query.js"
 import bcryptjs from 'bcryptjs'
+import cargarArchivos from "../../../helpers/CargaArchivos.js";
+import path from "path"
+import { fileURLToPath } from 'url';
+import fs from "fs"
+import { send } from "process";
 
 
 
@@ -41,13 +46,19 @@ export const eliminarUsuario = async (req = request, res = response)=>{
 export const actualizarUsuario = async (req = request, res = response)=>{
     try {
 
-        const {nombre, correo} = req.body
+        const {nombre, correo, apellido} = req.body
         const {numSolapin} = req.params
         const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)
         if (!existeSolapin) {
             return res.status(400).json({ error: 'El solapin no existe' });
         }
-        const result = await usuarioQuery.actualizarUsuarioQuery({nombre, correo}, numSolapin)
+
+        const existeCorreo = await usuarioQuery.existeUsernameQuery(correo)
+        if (existeCorreo) {
+            return res.status(400).json({ error: 'El correo ya existe' });
+        }
+        
+        const result = await usuarioQuery.actualizarUsuarioQuery({nombre, correo, apellido}, numSolapin)
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -80,9 +91,14 @@ export const usuarioConfirmado = async (req = request, res = response)=>{
 
 export const crearUsuario = async (req = request, res = response)=>{
     try {
-
-        const {nombre, correo, foto, numSolapin, usuario} = req.body
+        
+        if (!req.files || Object.keys(req.files).length === 0 || !req.files ) {
+            return res.status(500).json({msg:'No hay archivo a subir '})
+        }
     
+        const {nombre, correo, numSolapin, usuario, apellido} = req.body
+        
+
         const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)
         if (existeSolapin) {
             return res.status(400).json({ error: 'El solapin no existe' });
@@ -93,13 +109,46 @@ export const crearUsuario = async (req = request, res = response)=>{
             return res.status(400).json({ error: 'El usuario ya existe' });
         }
 
+        const existeCorreo = await usuarioQuery.existeUsernameQuery(correo)
+        if (existeCorreo) {
+            return res.status(400).json({ error: 'El correo ya existe' });
+        }
+        
+        const pathCompleto = await cargarArchivos(req.files)
+        if (!pathCompleto) {
+            return res.status(500).json({ msg: 'Error al cargar el archivo.' });
+        }
+
         const salt = bcryptjs.genSaltSync()
         const password = bcryptjs.hashSync(req.body.password, salt)
 
-        const result = await usuarioQuery.crearUsuarioQuery({nombre, usuario,correo, password, foto, numSolapin})
-        res.status(200).json({result})
+        const result = await usuarioQuery.crearUsuarioQuery({nombre, usuario,correo, password, foto: pathCompleto, numSolapin, apellido})
+        res.status(200).json({result, pathCompleto})
     } catch (error) {
         console.log(error)
+        return res.status(500).json(error)
+    }
+}
+
+export const mostrarImagen = async (req = request, res = response)=>{
+    try {
+        const {numSolapin} = req.params
+        const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)
+        if (!existeSolapin) {
+            return res.status(400).json({ error: 'El solapin no existe' });
+        }
+
+        if (!existeSolapin.foto) {
+            return res.status(400).json({ error: 'El usuario no tiene foto' });
+        }
+
+        const __filename = fileURLToPath(import.meta.url);
+            const directoryPath = path.dirname(__filename);
+            const pathImg = path.join(directoryPath, '../../../upload', existeSolapin.foto)
+            if (fs.existsSync(pathImg)) {
+                return  res.sendFile(pathImg)
+            }
+    } catch (error) {
         return res.status(500).json(error)
     }
 }

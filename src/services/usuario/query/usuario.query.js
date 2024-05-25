@@ -9,7 +9,8 @@ const crearUsuarioQuery = async (usuario) =>{
         foto: usuario.foto,
         usuario: usuario.usuario,
         password: usuario.password,
-        correo: usuario.correo
+        correo: usuario.correo,
+        apellido: usuario.apellido
     }})
     return result
 }
@@ -28,7 +29,8 @@ const actualizarUsuarioQuery = async (usuario, solapin)=>{
         foto: usuario.foto,
         usuario: usuario.usuario,
         password: usuario.password,
-        correo: usuario.correo
+        correo: usuario.correo,
+        apellido: usuario.apellido
     }})
     return result
 }

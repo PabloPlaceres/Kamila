@@ -1,22 +1,35 @@
-import { error } from "console";
-import { request, response } from "express";
+import {v4 as uuidv4} from "uuid"
 import path from "path"
+import { fileURLToPath } from 'url';
 
-const cargarArchivos = (res = response, req = request)=>{
-    if (!req.files || Object.keys(req.files).length === 0 || !req.files ) {
-        return res.status(500).json({msg:'No hay archivo a subir '})
-    }
 
-    const {archivo} = req.files
 
-    const uploadpath = path.join(__dirname, '../upload', archivo.name)
+const cargarArchivos = (files)=>{
+    
+    return new Promise( (resolve, reject) =>{
+        const {archivo} = files
 
-    console.log(archivo, uploadpath)
-    archivo.mv(uploadpath, (error)=>{
-        return res.status(500).json({error})
+        const nombreCortado = archivo.name.split('.')
+        const extension = nombreCortado[ nombreCortado.length - 1]
+    
+        const extensionesValidas = ['jpg', 'gif', 'png', 'jpeg']
+        if (!extensionesValidas.includes(extension)) {
+            return reject(`La ${extension} no es valida, las permitidas son ${extensionesValidas}`)
+        }
+    
+        
+        const nombreTemporal = uuidv4() + '.' + extension
+        const __filename = fileURLToPath(import.meta.url);
+        const directoryPath = path.dirname(__filename);
+        const uploadpath = path.join(directoryPath, '../upload', nombreTemporal)
+    
+        archivo.mv(uploadpath, (error)=>{
+            return reject(error)
+        })
+        
+        return resolve(uploadpath)
     })
     
-    return res.status(200).json({msg : 'Se subio el archivo '})
 }
 
 export default cargarArchivos
