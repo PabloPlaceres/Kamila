@@ -17,7 +17,7 @@ const verificarTokenAdmiPres = async (req= request, res= response, next)=>{
         
         const users = await prisma.usuario.findUnique({where: {numSolapin:numSolapin}})
         console.log(numSolapin)
-            if (!users.rol === 'ADMINISTRADOR'|| !users.rol === 'PRESIDENTE' || !users.rol === 'PLANIFICADOR') {
+            if (users.rol === 'ADMINISTRADOR'|| users.rol === 'PRESIDENTE' || users.rol === 'PLANIFICADOR') {
                 res.status(401).json({
                     msg: 'No tiene acceso'
             })

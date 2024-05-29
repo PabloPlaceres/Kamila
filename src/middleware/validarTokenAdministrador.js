@@ -15,9 +15,11 @@ const verificarTokenAdministrador = async (req= request, res= response, next)=>{
     try {
         const {numSolapin} = JWT.verify(token, process.env.SECRETORPRIVATEKEY)
         
-        const users = await prisma.usuario.findUnique({where: {numSolapin:numSolapin}})
+        const users = await prisma.usuario.findUnique({where: {
+            numSolapin:numSolapin
+        }})
         console.log(users.rol)
-            if (!users.rol === 'ADMINISTRADOR') {
+            if (users.rol === 'ADMINISTRADOR') {
                 res.status(401).json({
                     msg: 'No tiene acceso'
             })
