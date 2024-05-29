@@ -13,15 +13,15 @@ const verificarTokenAdmiPlan = async (req= request, res= response, next)=>{
         })
     }
     try {
-        const {id, rol} = JWT.verify(token, process.env.SECRETORPRIVATEKEY)
-        console.log(rol)
+        const {numSolapin} = JWT.verify(token, process.env.SECRETORPRIVATEKEY)
+        console.log(numSolapin, token)
             if (!rol === 'ADMINISTRADOR'||!rol === 'PLANIFICADOR') {
                 res.status(401).json({
                     msg: 'No tiene acceso'
             })
         }
         
-        const users = await prisma.usuario.findUnique({where: {idAdmi:id}})
+        const users = await prisma.usuario.findUnique({where: {idAdmi:numSolapin}})
         req.users = users   
         if (!users) {
         return res.status(401).json({msg: 'No existes en db'}) }  
