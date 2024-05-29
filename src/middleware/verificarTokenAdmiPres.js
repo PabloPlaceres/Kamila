@@ -14,14 +14,15 @@ const verificarTokenAdmiPres = async (req= request, res= response, next)=>{
     }
     try {
         const {numSolapin} = JWT.verify(token, process.env.SECRETORPRIVATEKEY)
+        
+        const users = await prisma.usuario.findUnique({where: {idAdmi:numSolapin}})
         console.log(numSolapin)
-            if (!rol === 'ADMINISTRADOR'|| !rol === 'PRESIDENTE' || !rol === 'PLANIFICADOR') {
+            if (!users.rol === 'ADMINISTRADOR'|| !users.rol === 'PRESIDENTE' || !users.rol === 'PLANIFICADOR') {
                 res.status(401).json({
                     msg: 'No tiene acceso'
             })
         }
         
-        const users = await prisma.usuario.findUnique({where: {idAdmi:numSolapin}})
         req.users = users   
         if (!users) {
         return res.status(401).json({msg: 'No existes en db'}) }  
