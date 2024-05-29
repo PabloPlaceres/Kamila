@@ -31,7 +31,7 @@ const verificarTokenAdministrador = async (req= request, res= response, next)=>{
     } catch (error) {
         console.log(error)
         return res.status(401).json({
-            msg: 'Token no valido'
+            msg: 'Token no valido  ADMINISTRADOR'
         })
     }
 }
