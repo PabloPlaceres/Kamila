@@ -15,7 +15,7 @@ const verificarTokenAdministrador = async (req= request, res= response, next)=>{
     try {
         const {numSolapin} = JWT.verify(token, process.env.SECRETORPRIVATEKEY)
         
-        const users = await prisma.usuario.findUnique({where: {
+        const users = await prisma.usuario.findFirst({where: {
             numSolapin:numSolapin
         }})
         console.log(users.rol)
