@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 
-const verificarTokenComun = async (req= request, res= response, next)=>{
+const verificarTokenAdmiPlan = async (req= request, res= response, next)=>{
     const token = req.header('x-Token')
     if(!token){
         return res.status(401).json({
@@ -37,4 +37,4 @@ const verificarTokenComun = async (req= request, res= response, next)=>{
 }
 
 
-export default verificarTokenComun
+export default verificarTokenAdmiPlan

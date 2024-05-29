@@ -152,3 +152,27 @@ export const mostrarImagen = async (req = request, res = response)=>{
         return res.status(500).json(error)
     }
 }
+
+
+
+
+
+export const seedUsers = async (req = request, res = response)=>{
+    try {
+        console.log('%csrc/services/usuarios/controllers/usuarios.controllers.js:19 {}', 'color: #007acc;', {});
+        const users = await usuarioQuery.listarUsuarioQuery()
+        console.log(users)
+        if(users?.length === 0){
+            console.log('Seeding', users)
+
+            const salt = bcryptjs.genSaltSync()
+            const password = bcryptjs.hashSync('Admin1234', salt)
+            
+            const result = await usuarioQuery.seedUsersQuery(password)
+            return res.status(200).json({result})
+        }
+
+    } catch (error) {
+        console.log('%csrc/services/usuarios/controllers/usuarios.controllers.js:49 error', 'color: #007acc;', error);
+    }
+}

@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 
-const verificarTokenAdmiPres = async (req= request, res= response, next)=>{
+const verificarTokenAdministrador = async (req= request, res= response, next)=>{
     const token = req.header('x-Token')
     if(!token){
         return res.status(401).json({
@@ -15,7 +15,7 @@ const verificarTokenAdmiPres = async (req= request, res= response, next)=>{
     try {
         const {id, rol} = JWT.verify(token, process.env.SECRETORPRIVATEKEY)
         console.log(rol)
-            if (!rol === 'ADMINISTRADOR'|| !rol === 'PRESIDENTE' || !rol === 'PLANIFICADOR') {
+            if (!rol === 'ADMINISTRADOR') {
                 res.status(401).json({
                     msg: 'No tiene acceso'
             })
@@ -37,4 +37,4 @@ const verificarTokenAdmiPres = async (req= request, res= response, next)=>{
 }
 
 
-export default verificarTokenAdmiPres
+export default verificarTokenAdministrador

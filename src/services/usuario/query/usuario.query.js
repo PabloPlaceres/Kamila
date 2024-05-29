@@ -66,10 +66,26 @@ const existeUsernameQuery = async (usuario)=>{
     return result
 }
 
+const seedUsersQuery = async (password)=>{
+    const result = await prisma.usuario.create({data:{
+        nombre : "ADMINISTRADOR",
+        apellido: "ADMINISTRADOR",
+        numSolapin: "T111111",
+        password : password,
+        foto: "",
+        usuario: "ADMINISTRADOR",
+        revisado: true,
+        rol: "ADMINISTRADOR"
+
+        
+    }})
+    return result
+}
+
 const usuarioQuery = {usuarioConfirmadoQuery, 
     listarUsuarioRevisadoQuery, listarUsuarioQuery,
     crearUsuarioQuery, eliminarUsuarioQuery, actualizarUsuarioQuery, 
-existeUsuarioQuery, existeUsernameQuery}
+existeUsuarioQuery, existeUsernameQuery, seedUsersQuery}
 
 
     export default usuarioQuery
