@@ -15,7 +15,7 @@ check('fecha', 'Debe incluir una fecha').not().isEmpty(),
 check('lugar', 'Debe incluir un lugar').not().isEmpty(),
 check('hora', 'Debe incluir una hora').not().isEmpty(),
 check('implicado', 'Debe incluir un implicado').not().isEmpty(),
-check('costo', 'Debe incluir un costo').not().isEmpty(), verifi()
+check('costo', 'Debe incluir un costo').not().isEmpty(), verifi
 ], crearActividad)
 .get("/actividad", [verifiToken, verificarTokenAdmiPlan], listarActividades)
 .delete("/actividad/:id", [verifiToken, verificarTokenAdmiPlan], eliminarActividad)
@@ -24,6 +24,6 @@ check('fecha', 'Debe incluir una fecha').not().isEmpty(),
 check('lugar', 'Debe incluir un lugar').not().isEmpty(),
 check('hora', 'Debe incluir una hora').not().isEmpty(),
 check('implicado', 'Debe incluir un implicado').not().isEmpty(),
-check('costo', 'Debe incluir un costo').not().isEmpty(), verifi()], actualizarActividad)
+check('costo', 'Debe incluir un costo').not().isEmpty(), verifi], actualizarActividad)
 
 export default actividadRouter

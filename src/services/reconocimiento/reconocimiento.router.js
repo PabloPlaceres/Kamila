@@ -14,7 +14,7 @@ check('fecha', 'Debe incluir una fecha').not().isEmpty(),
 check('tipo', 'Debe incluir un tipo de actividad').not().isEmpty(),
 check('costo', 'Debe ser un numero float ').isFloat(),
 check('implicado', 'Debe incluir un implicado').not().isEmpty(),
-check('costo', 'Debe incluir un costo').not().isEmpty(), verifi()], crearReconocimiento)
+check('costo', 'Debe incluir un costo').not().isEmpty(), verifi], crearReconocimiento)
 .get("/reconocimiento", [verifiToken, verificarTokenAdmiPlan], listarReconocimiento)
 .delete("/reconocimiento/:id", [verifiToken, verificarTokenAdmiPlan], eliminarReconocimiento)
 .put("/reconocimiento/:id", [verifiToken, verificarTokenAdmiPres, check('nombre', 'Debe incluir un nombre').not().isEmpty(),
@@ -22,6 +22,6 @@ check('fecha', 'Debe incluir una fecha').not().isEmpty(),
 check('tipo', 'Debe incluir un tipo de actividad').not().isEmpty(),
 check('costo', 'Debe ser un numero float ').isFloat(),
 check('implicado', 'Debe incluir un implicado').not().isEmpty(),
-check('costo', 'Debe incluir un costo').not().isEmpty(), verifi()], actualizarReconocimeinto)
+check('costo', 'Debe incluir un costo').not().isEmpty(), verifi], actualizarReconocimeinto)
 
 export default reconocimientoRouter

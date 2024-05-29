@@ -1,7 +1,8 @@
 import http from "http"
 import app from "./src/app.js";
+import { seedUsers } from "./src/services/usuario/controllers/usuario.controllers.js";
 
-import { seedUsers } from "./src/services/usuarios/controllers/usuarios.controllers.js";
+
 
 
 const server = new http.Server(app);

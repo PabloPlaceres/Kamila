@@ -17,7 +17,7 @@ check('presupuestoMensual', 'Debe ser un numero float ').isFloat(),
 check('fondoSidical', 'Debe incluir un fondo sidical').not().isEmpty(),
 check('presupuestoAnual', 'Debe incluir un presupuesto anual').not().isEmpty(),
 check('presupuestoMensual', 'Debe incluir un presupuesto mensual').not().isEmpty(),
-verifi()], crearNucleo)
+verifi], crearNucleo)
 .get("/nucleo", [verifiToken, verificarTokenAdministrador], listarNucleo)
 .delete("/nucleo/:id", [verifiToken, verificarTokenAdministrador], eliminarNucleo)
 .put("/nucleo/:id", [verifiToken, verificarTokenAdministrador, check('nombre', 'Debe incluir un nombre').not().isEmpty(),
@@ -29,6 +29,6 @@ check('presupuestoMensual', 'Debe ser un numero float ').isFloat(),
 check('fondoSidical', 'Debe incluir un fondo sidical').not().isEmpty(),
 check('presupuestoAnual', 'Debe incluir un presupuesto anual').not().isEmpty(),
 check('presupuestoMensual', 'Debe incluir un presupuesto mensual').not().isEmpty(),
-verifi()], actualizarNucleo)
+verifi], actualizarNucleo)
 
 export default nucleoRouter

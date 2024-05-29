@@ -169,7 +169,6 @@ export const seedUsers = async (req = request, res = response)=>{
             const password = bcryptjs.hashSync('Admin1234', salt)
             
             const result = await usuarioQuery.seedUsersQuery(password)
-            return res.status(200).json({result})
         }
 
     } catch (error) {
