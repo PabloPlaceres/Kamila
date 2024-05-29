@@ -20,10 +20,13 @@ const verificarTokenAdministrador = async (req= request, res= response, next)=>{
         }})
         console.log(users.rol)
             if (users.rol === 'ADMINISTRADOR') {
-                res.status(401).json({
-                    msg: 'No tiene acceso'
-            })
-        }
+                req.users = users 
+                return res.status(200).json({msg : "ok"})}
+                else{
+                    res.status(401).json({
+                        msg: 'No tiene acceso'
+                })
+                }
         
         req.users = users   
         if (!users) {

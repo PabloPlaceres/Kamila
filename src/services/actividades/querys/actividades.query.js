@@ -20,7 +20,7 @@ const eliminarActividadesoQuery = async (id)=>{
     return result
 }
 
-const listarActividadesQuery = async (nombre)=>{
+const listarActividadesQuery = async ()=>{
     const result = await prisma.actividad.findMany()
     return result
 }
