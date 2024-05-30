@@ -14,8 +14,9 @@ export const crearNucleo = async (req = request, res = response)=>{
         if (!presupuestoMensual || isNaN(mensual)) {
             return res.status(400).json({ error: 'El presupuesto mensual es requerido y debe ser un número.' });}
 
-            if (!fondoSindical || isNaN(fondo)) {
-                return res.status(400).json({ error: 'El fondo sindical es requerido y debe ser un número.' });}
+            console.log(fondo, fondoSindical)
+        if (!fondoSindical || isNaN(fondo)) {
+            return res.status(400).json({ error: 'El fondo sindical es requerido y debe ser un número.' });}
 
         const result = await nucleoQuery.crearNucleoQuery({ cantMilitante, nombre, presupuestoMensual, presupuestoAnual, fondoSindical})
         res.status(200).json({result})
