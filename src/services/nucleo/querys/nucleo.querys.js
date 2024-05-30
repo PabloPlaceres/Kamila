@@ -7,8 +7,8 @@ const crearNucleoQuery = async (nucleo) =>{
         nombre: nucleo.nombre,
         cantMilitante: nucleo.x,
         fondoSindical: nucleo.fondo,
-        presupuestoAnual: nucleo.Anual,
-        presupuestoMensual: nucleo.Mensual
+        presupuestoAnual: nucleo.anual,
+        presupuestoMensual: nucleo.mensual
     }})
     return result
 }
@@ -28,8 +28,8 @@ const actualizaNucleoQuery = async (nucleo, id)=>{
         nombre: nucleo.nombre,
         cantMilitante: nucleo.c,
         fondoSindical: nucleo.fondo,
-        presupuestoAnual: nucleo.Anual,
-        presupuestoMensual: nucleo.Mensual
+        presupuestoAnual: nucleo.anual,
+        presupuestoMensual: nucleo.mensual
         
     }})
     return result
