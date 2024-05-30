@@ -4,7 +4,9 @@ import nucleoQuery from "../querys/nucleo.querys.js";
 export const crearNucleo = async (req = request, res = response)=>{
     try {
         const { cantMilitante, nombre, presupuestoMensual, presupuestoAnual, fondoSindical} = req.body
-    
+        
+
+        const x = parseInt(cantMilitante)
         const anual = parseFloat(presupuestoAnual)
         const mensual = parseFloat(presupuestoMensual)
         const fondo = parseFloat(fondoSindical)
@@ -18,7 +20,7 @@ export const crearNucleo = async (req = request, res = response)=>{
         if (!fondoSindical || isNaN(fondo)) {
             return res.status(400).json({ error: 'El fondo sindical es requerido y debe ser un número.' });}
 
-        const result = await nucleoQuery.crearNucleoQuery({ cantMilitante, nombre, presupuestoMensual, presupuestoAnual, fondoSindical})
+        const result = await nucleoQuery.crearNucleoQuery({ x, nombre, presupuestoMensual, presupuestoAnual, fondoSindical})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -57,10 +59,13 @@ export const actualizarNucleo = async (req = request, res = response)=>{
         const { cantMilitante, nombre, presupuestoMensual, presupuestoAnual, fondoSindical} = req.body
         const id  = req.params.id
         const x = parseInt(id )
+        
         const existeNucleo = await nucleoQuery.existeNucleo(x)
         if(!existeNucleo) {
             return res.status(400).json({ error: 'El nucleo no existe' });
         }
+
+        const c = parseInt(cantMilitante)
 
         const anual = parseFloat(presupuestoAnual)
         const mensual = parseFloat(presupuestoMensual)
@@ -74,7 +79,7 @@ export const actualizarNucleo = async (req = request, res = response)=>{
         if (!fondoSindical || isNaN(fondo)) {
             return res.status(400).json({ error: 'El fondo sindical es requerido y debe ser un número.' });}
 
-        const result = await nucleoQuery.actualizaNucleoQuery({ cantMilitante, nombre, presupuestoMensual, presupuestoAnual, fondoSindical}, x)
+        const result = await nucleoQuery.actualizaNucleoQuery({ c, nombre, presupuestoMensual, presupuestoAnual, fondoSindical}, x)
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
