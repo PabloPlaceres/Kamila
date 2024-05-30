@@ -1,6 +1,5 @@
 import { request, response } from "express";
 import reconocimientoQuery from "../querys/reconocimiento.query.js";
-import JWT from "jsonwebtoken";
 import nucleoQuery from "../../nucleo/querys/nucleo.querys.js";
 
 

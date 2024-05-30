@@ -1,5 +1,6 @@
 import { request, response } from "express";
 import actividadQuery from "../querys/actividades.query.js";
+import nucleoQuery from "../../nucleo/querys/nucleo.querys.js";
 
 
 export const crearActividad = async (req = request, res = response)=>{
