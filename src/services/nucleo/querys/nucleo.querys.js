@@ -6,9 +6,9 @@ const crearNucleoQuery = async (nucleo) =>{
     const result = await prisma.nucleo.create({data:{
         nombre: nucleo.nombre,
         cantMilitante: nucleo.x,
-        fondoSindical: nucleo.fondoSindical,
-        presupuestoAnual: nucleo.presupuestoAnual,
-        presupuestoMensual: nucleo.presupuestoMensual
+        fondoSindical: nucleo.fondo,
+        presupuestoAnual: nucleo.Anual,
+        presupuestoMensual: nucleo.Mensual
     }})
     return result
 }
@@ -27,9 +27,9 @@ const actualizaNucleoQuery = async (nucleo, id)=>{
     const result = prisma.nucleo.update({where:{idNucleo: id},data:{
         nombre: nucleo.nombre,
         cantMilitante: nucleo.c,
-        fondoSindical: nucleo.fondoSindical,
-        presupuestoAnual: nucleo.presupuestoAnual,
-        presupuestoMensual: nucleo.presupuestoMensual
+        fondoSindical: nucleo.fondo,
+        presupuestoAnual: nucleo.Anual,
+        presupuestoMensual: nucleo.Mensual
         
     }})
     return result
