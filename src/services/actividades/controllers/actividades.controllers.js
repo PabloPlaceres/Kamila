@@ -6,7 +6,7 @@ import nucleoQuery from "../../nucleo/querys/nucleo.querys.js";
 export const crearActividad = async (req = request, res = response)=>{
     try {
         const {numSolapin} = req.users
-        const {nombre, lugar, fecha, hora, implicado, costo} = req.body
+        const {nombre, lugar, fecha, hora, implicado, costo, nombreNucleo} = req.body
 
         const nucleo = await nucleoQuery.existeNucleoNombre(nombreNucleo)
         
