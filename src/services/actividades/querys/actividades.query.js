@@ -10,7 +10,8 @@ const crearActividadesQuery = async (actividad) =>{
         hora: actividad.hora,
         implicado: actividad.implicado,
         solapin: actividad.numSolapin,
-        nucleoID: actividad.idNucleo
+        nucleoID: actividad.idNucleo,
+        costo: actividad.costo
     }})
     return result
 }
@@ -32,6 +33,7 @@ const actualizarActividadesQuery = async (actividad, id)=>{
         nombre: actividad.nombre,
         hora: actividad.hora,
         implicado: actividad.implicado,
+        costo: actividad.costo
     }})
     return result
 }

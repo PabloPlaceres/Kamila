@@ -9,7 +9,10 @@ export const crearActividad = async (req = request, res = response)=>{
         const {nombre, lugar, fecha, hora, implicado, costo, nombreNucleo} = req.body
 
         const nucleo = await nucleoQuery.existeNucleoNombre(nombreNucleo)
-        
+        const fondo = parseFloat(costo)
+        if (!costo || isNaN(fondo)) {
+        return res.status(400).json({ error: 'El costo es requerido y debe ser un número.' });}
+
         if (!nucleo) {
             return res.status(400).json({ error: 'El nucleo no existe' })
         }
@@ -17,7 +20,7 @@ export const crearActividad = async (req = request, res = response)=>{
         const {idNucleo} = nucleo
         if (!idNucleo) {return res.status(400).json({error: 'El nucleo no viene' })}
     
-        const result = await actividadQuery.crearActividadesQuery({nombre, lugar, fecha, hora, implicado, costo, numSolapin, idNucleo})
+        const result = await actividadQuery.crearActividadesQuery({nombre, lugar, fecha, hora, implicado, fondo, numSolapin, idNucleo})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -60,7 +63,11 @@ export const actualizarActividad = async (req = request, res = response)=>{
         if(!existeActividad) {
             return res.status(400).json({ error: 'La actividad no existe' });
         }
-        const result = await actividadQuery.actualizarActividadesQuery({nombre, lugar, fecha, hora, implicado, costo}, x)
+        const fondo = parseFloat(costo)
+        if (!costo || isNaN(fondo)) {
+            return res.status(400).json({ error: 'El costo es requerido y debe ser un número.' });}
+    
+        const result = await actividadQuery.actualizarActividadesQuery({nombre, lugar, fecha, hora, implicado, fondo}, x)
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
