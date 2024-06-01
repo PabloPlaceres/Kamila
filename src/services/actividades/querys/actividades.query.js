@@ -43,8 +43,12 @@ const existeActividad = async (id)=>{
     return result
 }
 
+const filtroQuery = async(any)=>{
+    const result = prisma.actividad.findMany({where:{any}})
+    return result
+}
 const actividadQuery = {
-    existeActividad,listarActividadesQuery, eliminarActividadesoQuery, crearActividadesQuery, actualizarActividadesQuery
+    filtroQuery,existeActividad,listarActividadesQuery, eliminarActividadesoQuery, crearActividadesQuery, actualizarActividadesQuery
 }
 
 export default actividadQuery
