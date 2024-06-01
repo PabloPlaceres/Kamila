@@ -97,7 +97,7 @@ export const crearUsuario = async (req = request, res = response)=>{
             return res.status(500).json({msg:'No hay archivo a subir '})
         }
     
-        const {nombre, correo, numSolapin, usuario, apellido} = req.body.valor
+        const {nombre, correo, numSolapin, usuario, apellido} = req.files.valor
 
         validarCorreo(correo)
         
