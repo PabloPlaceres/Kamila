@@ -10,7 +10,10 @@ export const crearReconocimiento = async (req = request, res = response)=>{
         const {numSolapin} = req.users
 
         const nucleo = await nucleoQuery.existeNucleoNombre(nombreNucleo)
-        
+        const fondo = parseFloat(costo)
+        if (!costo || isNaN(fondo)) {
+        return res.status(400).json({ error: 'El costo es requerido y debe ser un número.' });}
+
         if (!nucleo) {
             return res.status(400).json({ error: 'El nucleo no existe' })
         }
@@ -18,7 +21,7 @@ export const crearReconocimiento = async (req = request, res = response)=>{
         const {idNucleo} = nucleo
         if (!idNucleo) {return res.status(400).json({error: 'El nucleo no viene' })}
         
-        const result = await reconocimientoQuery.crearReconocimientoQuery({nombre, fecha, tipo, implicados, costo, numSolapin, idNucleo})
+        const result = await reconocimientoQuery.crearReconocimientoQuery({nombre, fecha, tipo, implicados, fondo, numSolapin, idNucleo})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -57,11 +60,14 @@ export const actualizarReconocimeinto = async (req = request, res = response)=>{
         const {nombre, fecha, tipo, implicado, costo} = req.body
         const id  = req.params.id
         const x = parseInt(id )
+        const fondo = parseFloat(costo)
+        if (!costo || isNaN(fondo)) {
+        return res.status(400).json({ error: 'El costo es requerido y debe ser un número.' });}
         const existeReconocimiento = await reconocimientoQuery.existereconocimiento(x)
         if(!existeReconocimiento) {
             return res.status(400).json({ error: 'El reconocimiento no existe' });
         }
-        const result = await reconocimientoQuery.actualizaReconocimientosQuery({nombre, fecha, tipo, implicado, costo},x)
+        const result = await reconocimientoQuery.actualizaReconocimientosQuery({nombre, fecha, tipo, implicado, fondo},x)
         res.status(200).json({result})
     } catch (error) {
         console.log(error)

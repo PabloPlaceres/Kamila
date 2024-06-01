@@ -7,7 +7,7 @@ const crearReconocimientoQuery = async (reconocimiento) =>{
         nombre: reconocimiento.nombre,
         fecha: reconocimiento.fecha,
         tipo: reconocimiento.tipo,
-        costo: reconocimiento.costo,
+        costo: reconocimiento.fondo,
         implicados: reconocimiento.implicados,
         solapin: reconocimiento.numSolapin,
         nucleoID: reconocimiento.idNucleo
@@ -30,7 +30,7 @@ const actualizaReconocimientosQuery = async (reconocimiento, id)=>{
         nombre: reconocimiento.nombre,
         fecha: reconocimiento.fecha,
         tipo: reconocimiento.tipo,
-        costo: reconocimiento.costo,
+        costo: reconocimiento.fondo,
         implicados: reconocimiento.implicados,
         nucleoID: reconocimiento.nucleoID
     }})
