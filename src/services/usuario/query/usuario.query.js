@@ -38,7 +38,7 @@ const actualizarUsuarioQuery = async (usuario, solapin)=>{
 
 
 const listarUsuarioRevisadoQuery = async ()=>{
-    const result= await prisma.usuario.findUnique({where:{revisado:false}})
+    const result= await prisma.usuario.findFirst({where:{revisado:false}})
     return result
 }
 
