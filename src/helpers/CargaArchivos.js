@@ -1,6 +1,7 @@
 import {v4 as uuidv4} from "uuid"
 import path from "path"
 import { fileURLToPath } from 'url';
+import multer from "multer";
 
 
 
@@ -33,3 +34,4 @@ const cargarArchivos = async(files)=>{
 }
 
 export default cargarArchivos
+

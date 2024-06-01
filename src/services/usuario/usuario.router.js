@@ -8,11 +8,12 @@ import { actualizarUsuario,
     listarUsuarioRevisado, mostrarImagen, usuarioConfirmado } from "./controllers/usuario.controllers.js";
 import verifiToken from "../../middleware/verifiToken.js";
 import verificarTokenAdministrador from "../../middleware/validarTokenAdministrador.js";
+import { upload } from "../../app.js";
 
 const usuarioRouter = Router()
 
 usuarioRouter 
-.post("/usuario",[check('nombre', 'Debe incluir un nombre').not().isEmpty(),
+.post("/usuario",[upload(),check('nombre', 'Debe incluir un nombre').not().isEmpty(),
 check('apellido', 'De incluir un apellido').not().isEmpty(),
 check('password', 'Debe poseer 8 caracteres').isLength({min:8}),
 check('usuario', 'Debe incluir un usuario').not().isEmpty(),
