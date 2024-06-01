@@ -5,7 +5,7 @@ import cargarArchivos from "../../../helpers/CargaArchivos.js";
 import path from "path"
 import { fileURLToPath } from 'url';
 import fs from "fs"
-import validarCorreo from "../../../helpers/validarCorreoUCI.js"
+import {validarCorreo} from "../../../helpers/validarCorreoUCI.js"
 
 
 export const listarUsuario = async (req= request, res= response)=>{
@@ -97,7 +97,7 @@ export const crearUsuario = async (req = request, res = response)=>{
             return res.status(500).json({msg:'No hay archivo a subir '})
         }
     
-        const {nombre, correo, numSolapin, usuario, apellido} = req.body
+        const {nombre, correo, numSolapin, usuario, apellido} = req.body.valor
 
         validarCorreo(correo)
         
