@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 
 
-const cargarArchivos = (files)=>{
+const cargarArchivos = async(files)=>{
     
     return new Promise( (resolve, reject) =>{
         const {archivo} = files
