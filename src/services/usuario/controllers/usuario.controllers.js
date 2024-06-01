@@ -53,6 +53,8 @@ export const actualizarUsuario = async (req = request, res = response)=>{
             return res.status(400).json({ error: 'El solapin no existe' });
         }
 
+        validarCorreo(correo)
+
         const existeCorreo = await usuarioQuery.existeUsernameQuery(correo)
         if (existeCorreo) {
             return res.status(400).json({ error: 'El correo ya existe' });
