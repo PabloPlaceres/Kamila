@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import router from "./routes/router.js"
 import fileUpload from "express-fileupload";
-import multer from "multer";
+import multer from 'multer';
 
 
 const testRouter = express.Router();
