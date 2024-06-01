@@ -15,18 +15,18 @@ const crearReconocimientoQuery = async (reconocimiento) =>{
     return result
 }
 
-const eliminarReconocimientoQuery = async (id)=>{
-    const result = await prisma.reconocimiento.delete({where:{idReconocimiento:id}})
+const eliminarReconocimientoQuery = async (x)=>{
+    const result = await prisma.reconocimiento.delete({where:{idReconocimiento:x}})
     return result
 }
 
-const listarReconocimientoQuery = async (nombre)=>{
-    const result = await prisma.reconocimiento.findUnique({where:{nombre:nombre}})
+const listarReconocimientoQuery = async ()=>{
+    const result = await prisma.reconocimiento.findMany()
     return result
 }
 
-const actualizaReconocimientosQuery = async (reconocimiento, id)=>{
-    const result = prisma.reconocimiento.update({where:{idReconocimiento: id},data:{
+const actualizaReconocimientosQuery = async (reconocimiento, x)=>{
+    const result = prisma.reconocimiento.update({where:{idReconocimiento: x},data:{
         nombre: reconocimiento.nombre,
         fecha: reconocimiento.fecha,
         tipo: reconocimiento.tipo,
@@ -37,8 +37,8 @@ const actualizaReconocimientosQuery = async (reconocimiento, id)=>{
     return result
 }
 
-const existereconocimiento = async (id)=>{
-    const result = prisma.reconocimiento.findFirst({where:{idReconocimiento:id}})
+const existereconocimiento = async (x)=>{
+    const result = prisma.reconocimiento.findFirst({where:{idReconocimiento:x}})
     return result
 }
 
