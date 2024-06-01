@@ -17,7 +17,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
