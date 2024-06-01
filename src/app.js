@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import router from "./routes/router.js"
 import fileUpload from "express-fileupload";
-import multer from 'multer';
+import {multer }from 'multer';
 
 
 const testRouter = express.Router();
@@ -16,6 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
 
 
 const storage = multer.diskStorage({
