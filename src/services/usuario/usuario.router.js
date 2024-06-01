@@ -42,4 +42,7 @@ verifi], actualizarUsuario)
 .put("/rol/:numSolapin", [verifiToken, verificarTokenAdministrador], usuarioConfirmado)
 .get("/usuario", [verifiToken, verificarTokenAdministrador], listarUsuario)
 .get("/cargarFoto/:numSolapin", [verifiToken, verificarTokenAdministrador], mostrarImagen)
+.post('/test-upload', upload.single('archivo'), (req, res) => {
+    res.send('Archivo recibido!');
+});
 export default usuarioRouter
