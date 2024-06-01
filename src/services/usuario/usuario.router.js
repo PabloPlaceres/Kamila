@@ -8,12 +8,24 @@ import { actualizarUsuario,
     listarUsuarioRevisado, mostrarImagen, usuarioConfirmado } from "./controllers/usuario.controllers.js";
 import verifiToken from "../../middleware/verifiToken.js";
 import verificarTokenAdministrador from "../../middleware/validarTokenAdministrador.js";
-import { upload } from "../../app.js";
+import  multer  from 'multer';
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        cb(null, file.fieldname + '-' + uniqueSuffix);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 const usuarioRouter = Router()
 
 usuarioRouter 
-.post("/usuario",[upload(),check('nombre', 'Debe incluir un nombre').not().isEmpty(),
+.post("/usuario",[upload.single('archivo'),check('nombre', 'Debe incluir un nombre').not().isEmpty(),
 check('apellido', 'De incluir un apellido').not().isEmpty(),
 check('password', 'Debe poseer 8 caracteres').isLength({min:8}),
 check('usuario', 'Debe incluir un usuario').not().isEmpty(),
