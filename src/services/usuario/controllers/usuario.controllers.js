@@ -93,7 +93,7 @@ export const usuarioConfirmado = async (req = request, res = response)=>{
 export const crearUsuario = async (req = request, res = response)=>{
     try {
         
-        if (!req.files || Object.keys(req.files).length === 0 || !req.files ) {
+        if (!req.file || Object.keys(req.file).length === 0 || !req.file ) {
             return res.status(500).json({msg:'No hay archivo a subir '})
         }
     
@@ -117,7 +117,7 @@ export const crearUsuario = async (req = request, res = response)=>{
             return res.status(400).json({ error: 'El correo ya existe' });
         }
         
-        const pathCompleto = await cargarArchivos(req.files)
+        const pathCompleto = await cargarArchivos(req.file)
         if (!pathCompleto) {
             return res.status(500).json({ msg: 'Error al cargar el archivo.' });
         }
