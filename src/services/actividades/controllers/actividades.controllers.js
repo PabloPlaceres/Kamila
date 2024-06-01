@@ -82,11 +82,9 @@ export const actualizarActividad = async (req = request, res = response)=>{
 
 export const filtro = async (req = request, res = response)=>{
     try {
-        if (!req.body) {
-            res.status(400).json({msj: 'Manda algo en la peticion'})
-        }
+        const {nombre, lugar, fecha} = req.body
 
-        const result = actividadQuery.filtroQuery(req.body)
+        const result = actividadQuery.filtroQuery(nombre, fecha, lugar)
         return res.status(200).json({result})
     } catch (error) {
         console.log(error)

@@ -43,8 +43,12 @@ const existeActividad = async (id)=>{
     return result
 }
 
-const filtroQuery = async(any)=>{
-    const result = prisma.actividad.findMany({where:{any}})
+const filtroQuery = async(nombre, fecha , lugar)=>{
+    const result = prisma.actividad.findMany({where:{
+        nombre: nombre,
+        fecha: fecha,
+        lugar:lugar
+    }})
     return result
 }
 const actividadQuery = {
