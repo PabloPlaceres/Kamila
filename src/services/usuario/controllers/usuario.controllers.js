@@ -5,7 +5,6 @@ import cargarArchivos from "../../../helpers/CargaArchivos.js";
 import path from "path"
 import { fileURLToPath } from 'url';
 import fs from "fs"
-import { send } from "process";
 import validarCorreo from "../../../helpers/validarCorreoUCI.js"
 
 
