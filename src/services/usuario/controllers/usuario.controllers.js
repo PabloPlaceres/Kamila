@@ -6,7 +6,7 @@ import path from "path"
 import { fileURLToPath } from 'url';
 import fs from "fs"
 import { send } from "process";
-
+import validarCorreo from "../../../helpers/validarCorreoUCI.js"
 
 
 export const listarUsuario = async (req= request, res= response)=>{
@@ -97,6 +97,8 @@ export const crearUsuario = async (req = request, res = response)=>{
         }
     
         const {nombre, correo, numSolapin, usuario, apellido} = req.body
+
+        validarCorreo(correo)
         
 
         const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)

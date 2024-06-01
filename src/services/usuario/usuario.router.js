@@ -6,14 +6,13 @@ import { actualizarUsuario,
     eliminarUsuario, 
     listarUsuario, 
     listarUsuarioRevisado, mostrarImagen, usuarioConfirmado } from "./controllers/usuario.controllers.js";
-import validarCorreo from "../../middleware/validarCorreoUCI.js";
 import verifiToken from "../../middleware/verifiToken.js";
 import verificarTokenAdministrador from "../../middleware/validarTokenAdministrador.js";
 
 const usuarioRouter = Router()
 
 usuarioRouter 
-.post("/usuario",[validarCorreo,check('nombre', 'Debe incluir un nombre').not().isEmpty(),
+.post("/usuario",[check('nombre', 'Debe incluir un nombre').not().isEmpty(),
 check('apellido', 'De incluir un apellido').not().isEmpty(),
 check('password', 'Debe poseer 8 caracteres').isLength({min:8}),
 check('usuario', 'Debe incluir un usuario').not().isEmpty(),

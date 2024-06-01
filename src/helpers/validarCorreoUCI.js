@@ -1,18 +1,18 @@
 import { request, response } from "express";
 
-const validarCorreo = async(req = request, res = response, next)=> {
+const validarCorreo = async(correo)=> {
 
-    const {correo} = req.users 
+
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if ((!correo)||(!regexEmail.test(correo))) {return res.status(400).json({msg: 'correo no valido'}); }
     
     const extensionUciCu = '.uci.cu';
-    if (correo.endsWith(extensionUciCu)) {
-        next();
+    if (!correo.endsWith(extensionUciCu)) {
+        return res.status(400).json({msg: 'correo no valido'}) 
     }
 
-    return res.status(400).json({msg: 'correo no valido'})
+    return true
 }
 
 export default validarCorreo
