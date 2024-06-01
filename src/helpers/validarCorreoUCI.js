@@ -1,5 +1,5 @@
 
-const validarCorreo = async(correo)=> {
+export const validarCorreo = async(correo)=> {
     return new Promise( (resolve, reject) =>{
 
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,4 +16,3 @@ const validarCorreo = async(correo)=> {
 })
 }
 
-export default validarCorreo
