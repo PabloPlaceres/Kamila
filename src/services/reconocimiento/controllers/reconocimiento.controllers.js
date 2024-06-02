@@ -88,10 +88,14 @@ export const actualizarReconocimeinto = async (req = request, res = response)=>{
 export const filtroR = async (req = request, res = response)=>{
     try {
         const {nombre, tipo, fecha} = req.params
+        const y = toString(tipo)
+        const x = toString(nombre)
+        const nombreCambiado = x.toLowerCase().replace(/\s+/g, '')
+        const tipoCambiado = y.toLowerCase().replace(/\s+/g, '')
 
         console.log(nombre, tipo, fecha)
 
-        const result = reconocimientoQuery.filtroQueryR(nombre, fecha, tipo)
+        const result = reconocimientoQuery.filtroQueryR(nombreCambiado, fecha, tipoCambiado)
         if (result.length === 0) {
             return res.status(200).json({msg: "No hay nada con esas caracteristicas"})
         }

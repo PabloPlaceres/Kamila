@@ -80,7 +80,7 @@ export const actualizarActividad = async (req = request, res = response)=>{
         if (!costo || isNaN(fondo)) {
             return res.status(400).json({ error: 'El costo es requerido y debe ser un número.' });}
     
-        const result = await actividadQuery.actualizarActividadesQuery({nombre, lugar, fecha, hora, implicado, fondo}, x)
+        const result = await actividadQuery.actualizarActividadesQuery({nombreCambiado, lugarCambiado, fecha, hora, implicado, fondo}, x)
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -92,10 +92,14 @@ export const actualizarActividad = async (req = request, res = response)=>{
 export const filtro = async (req = request, res = response)=>{
     try {
         const {nombre, lugar, fecha} = req.params
+        const y = toString(lugar)
+        const x = toString(nombre)
+        const nombreCambiado = x.toLowerCase().replace(/\s+/g, '')
+        const lugarCambiado = y.toLowerCase().replace(/\s+/g, '')
 
-        console.log(nombre, lugar, fecha)
+        console.log(nombreCambiado, lugarCambiado, fecha)
 
-        const result = await actividadQuery.filtroQuery(nombre, fecha, lugar)
+        const result = await actividadQuery.filtroQuery(nombreCambiado, fecha, lugarCambiado)
         console.log(result)
         if (result.length === 0) {
             return res.status(200).json({msg: "No hay nada con esas caracteristicas"})
