@@ -14,7 +14,7 @@ import multer from "multer";
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
 
-export const verifyPortada = async(next)=>{
+export const verifyPortada = (next)=>{
     let storage =  multer.diskStorage({
         destination: `../../upload`,
         filename: (res, file, cb)=>{
