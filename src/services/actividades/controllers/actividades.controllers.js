@@ -87,6 +87,9 @@ export const filtro = async (req = request, res = response)=>{
         console.log(nombre, lugar, fecha)
 
         const result = actividadQuery.filtroQuery(nombre, fecha, lugar)
+        if (!result) {
+            return res.status(200).json({msg: "No hay nada con esas caracteristicas"})
+        }
         return res.status(200).json({result})
     } catch (error) {
         console.log(error)
