@@ -23,6 +23,6 @@ check('tipo', 'Debe incluir un tipo de actividad').not().isEmpty(),
 check('costo', 'Debe ser un numero float ').isFloat(),
 check('implicados', 'Debe incluir un implicado').not().isEmpty(),
 check('costo', 'Debe incluir un costo').not().isEmpty(), verifi], actualizarReconocimeinto)
-.get("/reconocimiento/filtro/:nombre?/:fecha?/:tipo?",[], filtroR)
+.get("/reconocimiento/filtro/:nombre?/:fecha?/:tipo?",[verifiToken,verificarTokenAdmiPlan], filtroR)
 
 export default reconocimientoRouter
