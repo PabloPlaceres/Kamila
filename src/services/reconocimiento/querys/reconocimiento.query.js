@@ -42,8 +42,13 @@ const existereconocimiento = async (x)=>{
     return result
 }
 
+const eliminarPornucleoR =async (x)=>{
+    const result = prisma.reconocimiento.deleteMany({where:{nucleoID: x}})
+    return result
+    }
+
 const reconocimientoQuery = {
-    listarReconocimientoQuery,existereconocimiento, eliminarReconocimientoQuery, actualizaReconocimientosQuery, eliminarReconocimientoQuery, crearReconocimientoQuery
+    eliminarPornucleoR,listarReconocimientoQuery,existereconocimiento, eliminarReconocimientoQuery, actualizaReconocimientosQuery, eliminarReconocimientoQuery, crearReconocimientoQuery
 }
 
 export default reconocimientoQuery

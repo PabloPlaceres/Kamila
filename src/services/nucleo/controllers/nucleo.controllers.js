@@ -1,5 +1,7 @@
 import { request, response } from "express";
 import nucleoQuery from "../querys/nucleo.querys.js";
+import actividadQuery from "../../actividades/querys/actividades.query.js";
+import reconocimientoQuery from "../../reconocimiento/querys/reconocimiento.query.js";
 
 export const crearNucleo = async (req = request, res = response)=>{
     try {
@@ -46,6 +48,9 @@ export const eliminarNucleo = async (req = request, res = response)=>{
         if(!existeNucleo) {
             return res.status(400).json({ error: 'El nucleo no existe' });
         }
+        await actividadQuery.eliminarPornucleo(x)
+        await reconocimientoQuery.eliminarPornucleoR(x)
+
         const result = await nucleoQuery.eliminarNucleoQuery(x)
         res.status(200).json({result})
     } catch (error) {

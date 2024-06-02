@@ -43,6 +43,11 @@ const existeActividad = async (id)=>{
     return result
 }
 
+const eliminarPornucleo =async (x)=>{
+    const result = prisma.actividad.deleteMany({where:{nucleoID: x}})
+    return result
+    }
+
 const filtroQuery = async(nombre= null, fecha = null, lugar= null)=>{
     const result = prisma.actividad.findMany({where:{
         nombre: nombre,
@@ -52,7 +57,7 @@ const filtroQuery = async(nombre= null, fecha = null, lugar= null)=>{
     return result
 }
 const actividadQuery = {
-    filtroQuery,existeActividad,listarActividadesQuery, eliminarActividadesoQuery, crearActividadesQuery, actualizarActividadesQuery
+    eliminarPornucleo,filtroQuery,existeActividad,listarActividadesQuery, eliminarActividadesoQuery, crearActividadesQuery, actualizarActividadesQuery
 }
 
 export default actividadQuery
