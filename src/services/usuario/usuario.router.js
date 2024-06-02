@@ -26,7 +26,7 @@ export const verifyPortada = async(req = request, res = response, next)=>{
 }
 
 
-const storage = verify.verifyPortada
+const storage = verifyPortada()
 multer({storage})
 const usuarioRouter = Router()
 
