@@ -27,9 +27,9 @@ const listarReconocimientoQuery = async ()=>{
 
 const actualizaReconocimientosQuery = async (reconocimiento, x)=>{
     const result = prisma.reconocimiento.update({where:{idReconocimiento: x},data:{
-        nombre: reconocimiento.nombre,
+        nombre: reconocimiento.nombreCambiado,
         fecha: reconocimiento.fecha,
-        tipo: reconocimiento.tipo,
+        tipo: reconocimiento.tipoCambiodo,
         costo: reconocimiento.fondo,
         implicados: reconocimiento.implicados,
         nucleoID: reconocimiento.nucleoID

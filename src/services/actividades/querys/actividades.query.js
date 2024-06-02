@@ -4,9 +4,9 @@ const prisma = new PrismaClient()
 
 const crearActividadesQuery = async (actividad) =>{
     const result = await prisma.actividad.create({data:{
-        lugar: actividad.lugar,
+        lugar: actividad.lugarCambiado,
         fecha: actividad.fecha,
-        nombre: actividad.nombre,
+        nombre: actividad.nombreCambiado,
         hora: actividad.hora,
         implicado: actividad.implicado,
         solapin: actividad.numSolapin,
@@ -28,9 +28,9 @@ const listarActividadesQuery = async ()=>{
 
 const actualizarActividadesQuery = async (actividad, id)=>{
     const result = prisma.actividad.update({where:{idActividad: id},data:{
-        lugar: actividad.lugar,
+        lugar: actividad.lugarCambiado,
         fecha: actividad.fecha,
-        nombre: actividad.nombre,
+        nombre: actividad.nombreCambiado,
         hora: actividad.hora,
         implicado: actividad.implicado,
         costo: actividad.fondo

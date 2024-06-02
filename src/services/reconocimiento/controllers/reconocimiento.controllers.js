@@ -9,6 +9,12 @@ export const crearReconocimiento = async (req = request, res = response)=>{
         const {nombre, fecha, tipo, implicados, costo, nombreNucleo} = req.body
         const {numSolapin} = req.users
 
+        const y = toString(tipo)
+        const x = toString(nombre)
+        const nombreCambiado = x.toLowerCase().replace(/\s+/g, '')
+        const tipoCambiado = y.toLowerCase().replace(/\s+/g, '')
+
+
         const nucleo = await nucleoQuery.existeNucleoNombre(nombreNucleo)
         const fondo = parseFloat(costo)
         if (!costo || isNaN(fondo)) {
@@ -21,7 +27,7 @@ export const crearReconocimiento = async (req = request, res = response)=>{
         const {idNucleo} = nucleo
         if (!idNucleo) {return res.status(400).json({error: 'El nucleo no viene' })}
         
-        const result = await reconocimientoQuery.crearReconocimientoQuery({nombre, fecha, tipo, implicados, fondo, numSolapin, idNucleo})
+        const result = await reconocimientoQuery.crearReconocimientoQuery({nombreCambiado, fecha, tipoCambiado, implicados, fondo, numSolapin, idNucleo})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -58,6 +64,10 @@ export const eliminarReconocimiento = async (req = request, res = response)=>{
 export const actualizarReconocimeinto = async (req = request, res = response)=>{
     try {
         const {nombre, fecha, tipo, implicado, costo} = req.body
+        const y = toString(tipo)
+        const z = toString(nombre)
+        const nombreCambiado = z.toLowerCase().replace(/\s+/g, '')
+        const tipoCambiado = y.toLowerCase().replace(/\s+/g, '')
         const id  = req.params.id
         const x = parseInt(id )
         const fondo = parseFloat(costo)
@@ -67,7 +77,7 @@ export const actualizarReconocimeinto = async (req = request, res = response)=>{
         if(!existeReconocimiento) {
             return res.status(400).json({ error: 'El reconocimiento no existe' });
         }
-        const result = await reconocimientoQuery.actualizaReconocimientosQuery({nombre, fecha, tipo, implicado, fondo},x)
+        const result = await reconocimientoQuery.actualizaReconocimientosQuery({nombreCambiado, fecha, tipoCambiado, implicado, fondo},x)
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
