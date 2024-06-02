@@ -47,8 +47,17 @@ const eliminarPornucleoR =async (x)=>{
     return result
     }
 
+    const filtroQueryR = async(nombre = undefined, fecha = undefined, tipo= undefined)=>{
+        console.log(nombre, tipo, fecha, "Query")
+        const result = prisma.reconocimiento.findMany({where:{
+            nombre: nombre,
+            tipo: tipo,
+            fecha: fecha }})
+        return result
+    }
+
 const reconocimientoQuery = {
-    eliminarPornucleoR,listarReconocimientoQuery,existereconocimiento, eliminarReconocimientoQuery, actualizaReconocimientosQuery, eliminarReconocimientoQuery, crearReconocimientoQuery
+    filtroQueryR,eliminarPornucleoR,listarReconocimientoQuery,existereconocimiento, eliminarReconocimientoQuery, actualizaReconocimientosQuery, eliminarReconocimientoQuery, crearReconocimientoQuery
 }
 
 export default reconocimientoQuery

@@ -74,3 +74,17 @@ export const actualizarReconocimeinto = async (req = request, res = response)=>{
         return res.status(500).json(error)
     }
 }
+
+export const filtroR = async (req = request, res = response)=>{
+    try {
+        const {nombre, lugar, fecha} = req.body
+
+        console.log(nombre, lugar, fecha)
+
+        const result = reconocimientoQuery.filtroQueryR(nombre, fecha, lugar)
+        return res.status(200).json({result})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(error)
+    }
+}
