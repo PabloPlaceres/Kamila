@@ -82,6 +82,9 @@ export const filtroR = async (req = request, res = response)=>{
         console.log(nombre, tipo, fecha)
 
         const result = reconocimientoQuery.filtroQueryR(nombre, fecha, tipo)
+        if (result.length === 0) {
+            return res.status(200).json({msg: "No hay nada con esas caracteristicas"})
+        }
         return res.status(200).json({result})
     } catch (error) {
         console.log(error)

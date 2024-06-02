@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ dest: upload });
 
 const usuarioRouter = Router()
 
@@ -44,5 +44,8 @@ verifi], actualizarUsuario)
 .get("/cargarFoto/:numSolapin", [verifiToken, verificarTokenAdministrador], mostrarImagen)
 .post('/test-upload', upload.single('archivo'), (req, res) => {
     res.send('Archivo recibido!');
+},(err, req, res, next) => {
+    console.error(err);
+    res.status(500).send('Ocurrió un error al subir el archivo');
 });
 export default usuarioRouter
