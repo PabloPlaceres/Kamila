@@ -82,7 +82,7 @@ export const actualizarActividad = async (req = request, res = response)=>{
 
 export const filtro = async (req = request, res = response)=>{
     try {
-        const {nombre, lugar, fecha} = req.body
+        const {nombre, lugar, fecha} = req.params
 
         console.log(nombre, lugar, fecha)
 

@@ -77,7 +77,7 @@ export const actualizarReconocimeinto = async (req = request, res = response)=>{
 
 export const filtroR = async (req = request, res = response)=>{
     try {
-        const {nombre, tipo, fecha} = req.body
+        const {nombre, tipo, fecha} = req.params
 
         console.log(nombre, tipo, fecha)
 
