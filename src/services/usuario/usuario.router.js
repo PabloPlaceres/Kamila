@@ -25,7 +25,7 @@ export const verifyPortada = async(next)=>{
 }
 
 
-const storage = verifyPortada()
+const storage = verifyPortada
 multer({storage})
 const usuarioRouter = Router()
 
