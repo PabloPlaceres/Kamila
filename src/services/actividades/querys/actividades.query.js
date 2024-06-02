@@ -48,8 +48,11 @@ const eliminarPornucleo =async (x)=>{
     return result
     }
 
-const filtroQuery = async(query)=>{
-    const result = prisma.actividad.findMany({where:{query}})
+const filtroQuery = async(nombre = undefined, fecha = undefined, lugar= undefined)=>{
+    const result = prisma.actividad.findMany({where:{
+        nombre: nombre,
+        lugar: lugar,
+        fecha: fecha }})
     return result
 }
 const actividadQuery = {

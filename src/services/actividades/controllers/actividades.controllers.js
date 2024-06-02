@@ -82,16 +82,9 @@ export const actualizarActividad = async (req = request, res = response)=>{
 
 export const filtro = async (req = request, res = response)=>{
     try {
-        let query = {};
-    for (let [campo, valor] of Object.entries(req.body)) {
-            if (valor!== undefined && valor!== null) {
-                query[campo] = {
-                    contains: valor,
-        };
-    }
-    }         
+        const {nombre, lugar, fecha} = req.body
 
-        const result = actividadQuery.filtroQuery({query})
+        const result = actividadQuery.filtroQuery(nombre, fecha, lugar)
         return res.status(200).json({result})
     } catch (error) {
         console.log(error)
