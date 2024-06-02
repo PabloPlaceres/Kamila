@@ -10,7 +10,7 @@ import verifiToken from "../../middleware/verifiToken.js";
 import verificarTokenAdministrador from "../../middleware/validarTokenAdministrador.js";
 import  multer  from 'multer';
 
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, '../../upload');
     },
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
         cb(null, file.fieldname + '-' + uniqueSuffix);
     }
-});
+});*/
 
 const upload = multer({ dest: upload });
 
