@@ -11,13 +11,12 @@ import verificarTokenAdministrador from "../../middleware/validarTokenAdministra
 
 
 import multer from "multer";
-import { request, response } from "express";
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
 
-export const verifyPortada = async(req = request, res = response, next)=>{
+export const verifyPortada = async(next)=>{
     let storage =  multer.diskStorage({
-        destination: `upload`,
+        destination: `../../upload`,
         filename: (res, file, cb)=>{
             cb(null, uuidv4() + path.extname(file.originalname))
         }
