@@ -14,23 +14,25 @@ import multer from "multer";
 import { v4 as uuidv4 } from 'uuid';
 import path from "path";
 
-export const verifyPortada = (next)=>{
-    let storage =  multer.diskStorage({
-        destination: `../../upload`,
-        filename: (res, file, cb)=>{
-            cb(null, uuidv4() + path.extname(file.originalname))
-        }
-    })
-    return storage
-}
+const verifyPortada = () => {
+    return multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, 'upload');
+        },
+        filename: (req, file, cb) => {
+            cb(null, `${uuidv4()}${path.extname(file.originalname)}`);
+        },
+    });
+};
 
 
-const storage = verifyPortada
-multer({storage})
+
+const storage = verifyPortada();
+const upload = multer({ storage });
 const usuarioRouter = Router()
 
 usuarioRouter 
-.post("/usuario",[verifyPortada.single('archivo'),check('nombre', 'Debe incluir un nombre').not().isEmpty(),
+.post("/usuario",[upload.single('archivo'),check('nombre', 'Debe incluir un nombre').not().isEmpty(),
 check('apellido', 'De incluir un apellido').not().isEmpty(),
 check('password', 'Debe poseer 8 caracteres').isLength({min:8}),
 check('usuario', 'Debe incluir un usuario').not().isEmpty(),
@@ -47,7 +49,7 @@ verifi], actualizarUsuario)
 .put("/rol/:numSolapin", [verifiToken, verificarTokenAdministrador], usuarioConfirmado)
 .get("/usuario", [verifiToken, verificarTokenAdministrador], listarUsuario)
 .get("/cargarFoto/:numSolapin", [verifiToken, verificarTokenAdministrador], mostrarImagen)
-.post('/test-upload', verifyPortada.single('archivo'), (req, res) => {
+.post('/test-upload', upload.single('archivo'), (req, res) => {
     res.send('Archivo recibido!');
 },(err, req, res, next) => {
     console.error(err);
