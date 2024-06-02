@@ -8,8 +8,26 @@ import { actualizarUsuario,
     listarUsuarioRevisado, mostrarImagen, usuarioConfirmado } from "./controllers/usuario.controllers.js";
 import verifiToken from "../../middleware/verifiToken.js";
 import verificarTokenAdministrador from "../../middleware/validarTokenAdministrador.js";
-import { verifyPortada } from "../../middleware/multe.js";
 
+
+import multer from "multer";
+import { request, response } from "express";
+import { v4 as uuidv4 } from 'uuid';
+import path from "path";
+
+export const verifyPortada = async(req = request, res = response, next)=>{
+    let storage =  multer.diskStorage({
+        destination: `upload`,
+        filename: (res, file, cb)=>{
+            cb(null, uuidv4() + path.extname(file.originalname))
+        }
+    })
+    return storage
+}
+
+
+const storage = verify.verifyPortada
+multer({storage})
 const usuarioRouter = Router()
 
 usuarioRouter 
