@@ -4,9 +4,9 @@ const prisma = new PrismaClient()
 
 const crearReconocimientoQuery = async (reconocimiento) =>{
     const result = await prisma.reconocimiento.create({data:{
-        nombre: reconocimiento.nombre,
+        nombre: reconocimiento.nombreCambiado,
         fecha: reconocimiento.fecha,
-        tipo: reconocimiento.tipo,
+        tipo: reconocimiento.tipoCambiodo,
         costo: reconocimiento.fondo,
         implicados: reconocimiento.implicados,
         solapin: reconocimiento.numSolapin,
