@@ -4,9 +4,9 @@ const prisma = new PrismaClient()
 
 const crearReconocimientoQuery = async (reconocimiento) =>{
     const result = await prisma.reconocimiento.create({data:{
-        nombre: reconocimiento.nombreCambiado,
+        nombre: reconocimiento.nombre,
         fecha: reconocimiento.fecha,
-        tipo: reconocimiento.tipoCambiodo,
+        tipo: reconocimiento.tipo,
         costo: reconocimiento.fondo,
         implicados: reconocimiento.implicados,
         solapin: reconocimiento.numSolapin,
@@ -27,9 +27,9 @@ const listarReconocimientoQuery = async ()=>{
 
 const actualizaReconocimientosQuery = async (reconocimiento, x)=>{
     const result = prisma.reconocimiento.update({where:{idReconocimiento: x},data:{
-        nombre: reconocimiento.nombreCambiado,
+        nombre: reconocimiento.nombre,
         fecha: reconocimiento.fecha,
-        tipo: reconocimiento.tipoCambiodo,
+        tipo: reconocimiento.tipo,
         costo: reconocimiento.fondo,
         implicados: reconocimiento.implicados,
         nucleoID: reconocimiento.nucleoID
@@ -47,17 +47,9 @@ const eliminarPornucleoR =async (x)=>{
     return result
     }
 
-    const filtroQueryR = async(nombre = undefined, fecha = undefined, tipo= undefined)=>{
-        console.log(nombre, tipo, fecha, "Query")
-        const result = prisma.reconocimiento.findMany({where:{
-            nombre: nombre,
-            tipo: tipo,
-            fecha: fecha }})
-        return result
-    }
 
 const reconocimientoQuery = {
-    filtroQueryR,eliminarPornucleoR,listarReconocimientoQuery,existereconocimiento, eliminarReconocimientoQuery, actualizaReconocimientosQuery, eliminarReconocimientoQuery, crearReconocimientoQuery
+    eliminarPornucleoR,listarReconocimientoQuery,existereconocimiento, eliminarReconocimientoQuery, actualizaReconocimientosQuery, eliminarReconocimientoQuery, crearReconocimientoQuery
 }
 
 export default reconocimientoQuery

@@ -4,9 +4,9 @@ const prisma = new PrismaClient()
 
 const crearActividadesQuery = async (actividad) =>{
     const result = await prisma.actividad.create({data:{
-        lugar: actividad.lugarCambiado,
+        lugar: actividad.lugar,
         fecha: actividad.fecha,
-        nombre: actividad.nombreCambiado,
+        nombre: actividad.nombre,
         hora: actividad.hora,
         implicado: actividad.implicado,
         solapin: actividad.numSolapin,
@@ -28,9 +28,9 @@ const listarActividadesQuery = async ()=>{
 
 const actualizarActividadesQuery = async (actividad, id)=>{
     const result = prisma.actividad.update({where:{idActividad: id},data:{
-        lugar: actividad.lugarCambiado,
+        lugar: actividad.lugar,
         fecha: actividad.fecha,
-        nombre: actividad.nombreCambiado,
+        nombre: actividad.nombre,
         hora: actividad.hora,
         implicado: actividad.implicado,
         costo: actividad.fondo
@@ -48,16 +48,9 @@ const eliminarPornucleo =async (x)=>{
     return result
     }
 
-const filtroQuery = async(nombre = undefined, fecha = undefined, lugar= undefined)=>{
-    console.log(nombre, lugar, fecha, "Query")
-    const result = prisma.actividad.findMany({where:{
-        nombre: nombre,
-        lugar: lugar,
-        fecha: fecha }})
-    return result
-}
+
 const actividadQuery = {
-    eliminarPornucleo,filtroQuery,existeActividad,listarActividadesQuery, eliminarActividadesoQuery, crearActividadesQuery, actualizarActividadesQuery
+    eliminarPornucleo,existeActividad,listarActividadesQuery, eliminarActividadesoQuery, crearActividadesQuery, actualizarActividadesQuery
 }
 
 export default actividadQuery

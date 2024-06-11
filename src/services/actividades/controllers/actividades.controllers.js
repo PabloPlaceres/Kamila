@@ -11,10 +11,6 @@ export const crearActividad = async (req = request, res = response)=>{
             res.status(400).json({msg: 'Se nesecita numero de solapin'})
         }
         const {nombre, lugar, fecha, hora, implicado, costo, nombreNucleo} = req.body
-        const y = toString(lugar)
-        const x = toString(nombre)
-        const nombreCambiado = x.toLowerCase().replace(/\s+/g, '')
-        const lugarCambiado = y.toLowerCase().replace(/\s+/g, '')
 
         const nucleo = await nucleoQuery.existeNucleoNombre(nombreNucleo)
         const fondo = parseFloat(costo)
@@ -28,7 +24,7 @@ export const crearActividad = async (req = request, res = response)=>{
         const {idNucleo} = nucleo
         if (!idNucleo) {return res.status(400).json({error: 'El nucleo no viene' })}
     
-        const result = await actividadQuery.crearActividadesQuery({nombreCambiado, lugarCambiado, fecha, hora, implicado, fondo, numSolapin, idNucleo})
+        const result = await actividadQuery.crearActividadesQuery({nombre, lugar, fecha, hora, implicado, fondo, numSolapin, idNucleo})
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -65,10 +61,6 @@ export const eliminarActividad = async (req = request, res = response)=>{
 export const actualizarActividad = async (req = request, res = response)=>{
     try {
         const {nombre, lugar, fecha, hora, implicado, costo} = req.body
-        const y = toString(lugar)
-        const z = toString(nombre)
-        const nombreCambiado = z.toLowerCase().replace(/\s+/g, '')
-        const lugarCambiado = y.toLowerCase().replace(/\s+/g, '')
 
         const id  = req.params.id
         const x = parseInt(id )
@@ -80,7 +72,7 @@ export const actualizarActividad = async (req = request, res = response)=>{
         if (!costo || isNaN(fondo)) {
             return res.status(400).json({ error: 'El costo es requerido y debe ser un número.' });}
     
-        const result = await actividadQuery.actualizarActividadesQuery({nombreCambiado, lugarCambiado, fecha, hora, implicado, fondo}, x)
+        const result = await actividadQuery.actualizarActividadesQuery({nombre, lugar, fecha, hora, implicado, fondo}, x)
         res.status(200).json({result})
     } catch (error) {
         console.log(error)
@@ -89,24 +81,3 @@ export const actualizarActividad = async (req = request, res = response)=>{
 }
 
 
-export const filtro = async (req = request, res = response)=>{
-    try {
-        const {nombre, lugar, fecha} = req.params
-        const y = toString(lugar)
-        const x = toString(nombre)
-        const nombreCambiado = x.toLowerCase().replace(/\s+/g, '')
-        const lugarCambiado = y.toLowerCase().replace(/\s+/g, '')
-
-        console.log(nombreCambiado, lugarCambiado, fecha)
-
-        const result = await actividadQuery.filtroQuery(nombreCambiado, fecha, lugarCambiado)
-        console.log(result)
-        if (result.length === 0) {
-            return res.status(200).json({msg: "No hay nada con esas caracteristicas"})
-        }
-        return res.status(200).json({result})
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json(error)
-    }
-}

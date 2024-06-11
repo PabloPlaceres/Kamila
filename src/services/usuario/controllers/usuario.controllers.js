@@ -1,10 +1,6 @@
 import { request, response } from "express";
 import usuarioQuery from "../query/usuario.query.js"
 import bcryptjs from 'bcryptjs'
-import cargarArchivos from '../../../helpers/CargaArchivos.js';
-import path from "path"
-import { fileURLToPath } from 'url';
-import fs from "fs"
 import { validarCorreo } from '../../../helpers/validarCorreoUCI.js'
 
 
@@ -117,15 +113,11 @@ export const crearUsuario = async (req = request, res = response)=>{
             return res.status(400).json({ error: 'El correo ya existe' });
         }
         
-        const pathCompleto = await cargarArchivos(req.file)
-        if (!pathCompleto) {
-            return res.status(500).json({ msg: 'Error al cargar el archivo.' });
-        }
 
         const salt = bcryptjs.genSaltSync()
         const password = bcryptjs.hashSync(req.body.password, salt)
 
-        const result = await usuarioQuery.crearUsuarioQuery({nombre, usuario,correo, password, foto: pathCompleto, numSolapin, apellido})
+        const result = await usuarioQuery.crearUsuarioQuery({nombre, usuario,correo, password, numSolapin, apellido})
         res.status(200).json({result, pathCompleto})
     } catch (error) {
         console.log(error)
@@ -133,7 +125,7 @@ export const crearUsuario = async (req = request, res = response)=>{
     }
 }
 
-export const mostrarImagen = async (req = request, res = response)=>{
+/*export const mostrarImagen = async (req = request, res = response)=>{
     try {
         const {numSolapin} = req.params
         const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)
@@ -154,7 +146,7 @@ export const mostrarImagen = async (req = request, res = response)=>{
     } catch (error) {
         return res.status(500).json(error)
     }
-}
+}*/
 
 
 

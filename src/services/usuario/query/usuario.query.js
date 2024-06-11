@@ -6,7 +6,6 @@ const crearUsuarioQuery = async (usuario) =>{
     const result = await prisma.usuario.create({data:{
         nombre: usuario.nombre,
         numSolapin: usuario.numSolapin,
-        foto: usuario.foto,
         usuario: usuario.usuario,
         password: usuario.password,
         correo: usuario.correo,
@@ -26,7 +25,6 @@ const actualizarUsuarioQuery = async (usuario, solapin)=>{
     const result = prisma.usuario.update({where:{numSolapin: solapin},data:{
         nombre: usuario.nombre,
         numSolapin: usuario.numSolapin,
-        foto: usuario.foto,
         usuario: usuario.usuario,
         password: usuario.password,
         correo: usuario.correo,
@@ -72,7 +70,6 @@ const seedUsersQuery = async (password)=>{
         apellido: "ADMINISTRADOR",
         numSolapin: "T111111",
         password : password,
-        foto: "",
         usuario: "ADMINISTRADOR",
         revisado: true,
         rol: "ADMINISTRADOR"

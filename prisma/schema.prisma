@@ -20,7 +20,6 @@ nombre String
 apellido String
 correo String? @unique
 password String
-foto String
 usuario String @unique
 rol String @default("MIEMBRO")
 numSolapin String @unique @id
