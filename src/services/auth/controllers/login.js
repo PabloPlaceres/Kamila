@@ -7,8 +7,8 @@ import loginQuery from "../query/login.query.js"
 
 
 export const login = async(req = request, res = response)=>{
+    const {usuario, password} = req.body
     try {
-        const {usuario, password} = req.body
         console.log(usuario , password)
 
         const user = await loginQuery(usuario)
