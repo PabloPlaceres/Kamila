@@ -6,7 +6,7 @@ export const validarCorreo = async(correo)=> {
 
     if ((!correo)||(!regexEmail.test(correo))) {return reject({msg: 'correo no valido'}); }
     
-    const extensionUciCu = '.uci.cu';
+    const extensionUciCu = '@uci.cu';
     if (!correo.endsWith(extensionUciCu)) {
         return reject({msg: 'correo no valido'}) 
     }
