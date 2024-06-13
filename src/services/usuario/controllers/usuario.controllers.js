@@ -91,7 +91,7 @@ export const crearUsuario = async (req = request, res = response)=>{
     
         const {nombre, correo, numSolapin, usuario, apellido} = req.body
 
-        //validarCorreo(correo)
+        await validarCorreo(correo)
         
 
         const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)

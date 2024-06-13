@@ -22,7 +22,7 @@ const eliminarUsuarioQuery = async (solapin)=>{
 
 
 const actualizarUsuarioQuery = async (usuario, solapin)=>{
-    const result = prisma.usuario.update({where:{numSolapin: solapin},data:{
+    const result = await prisma.usuario.update({where:{numSolapin: solapin},data:{
         nombre: usuario.nombre,
         numSolapin: usuario.numSolapin,
         usuario: usuario.usuario,
