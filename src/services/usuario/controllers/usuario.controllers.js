@@ -91,10 +91,13 @@ export const crearUsuario = async (req = request, res = response)=>{
     
         const {nombre, correo, numSolapin, usuario, apellido} = req.body
 
-        const gmail = await validarCorreo(correo)
-        console.log(gmail)
-        if (!gmail) {
-            return res.status(400).json({message:"correo is invalid"})
+
+        if (correo) {
+            const gmail = await validarCorreo(correo)
+            console.log(gmail)
+            if (!gmail) {
+                return res.status(400).json({message:"correo is invalid"})
+            }
         }
 
         const existeSolapin = await usuarioQuery.existeUsuarioQuery(numSolapin)
