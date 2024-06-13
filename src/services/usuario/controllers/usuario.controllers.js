@@ -88,10 +88,6 @@ export const usuarioConfirmado = async (req = request, res = response)=>{
 
 export const crearUsuario = async (req = request, res = response)=>{
     try {
-        
-        if (!req.file || Object.keys(req.file).length === 0 || !req.file ) {
-            return res.status(500).json({msg:'No hay archivo a subir '})
-        }
     
         const {nombre, correo, numSolapin, usuario, apellido} = req.body
 
@@ -118,7 +114,7 @@ export const crearUsuario = async (req = request, res = response)=>{
         const password = bcryptjs.hashSync(req.body.password, salt)
 
         const result = await usuarioQuery.crearUsuarioQuery({nombre, usuario,correo, password, numSolapin, apellido})
-        res.status(200).json({result, pathCompleto})
+        res.status(200).json({result})
     } catch (error) {
         console.log(error)
         return res.status(500).json(error)

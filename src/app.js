@@ -4,20 +4,8 @@ import cors from "cors";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import router from "./routes/router.js"
-import fileUpload from "express-fileupload";
-import  multer  from 'multer';
+//import fileUpload from "express-fileupload";
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads/');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-        cb(null, file.fieldname + '-' + uniqueSuffix);
-    }
-});
-
-const upload = multer({ storage: storage });
 
 
 const testRouter = express.Router();
@@ -33,11 +21,11 @@ const app = express();
 
 
 
-app.use(fileUpload({
+/*app.use(fileUpload({
     useTempFiles: true,
     tempFileDir : '/tmp/',
     limits: { fileSize: 50 * 1024 * 1024 }
-}))
+}))*/
 
 app.use(cors());
 
