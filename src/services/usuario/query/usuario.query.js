@@ -79,7 +79,11 @@ const seedUsersQuery = async (password)=>{
     return result
 }
 
-const usuarioQuery = {usuarioConfirmadoQuery, 
+const buscarCorreo = async (correo) => {
+    const result = await prisma.usuario.findUnique({where: {correo: correo}})
+    return result
+}
+const usuarioQuery = {buscarCorreo, usuarioConfirmadoQuery, 
     listarUsuarioRevisadoQuery, listarUsuarioQuery,
     crearUsuarioQuery, eliminarUsuarioQuery, actualizarUsuarioQuery, 
 existeUsuarioQuery, existeUsernameQuery, seedUsersQuery}
